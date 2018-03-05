@@ -42,8 +42,10 @@ class Record:
         self.domain = domain
         self.cache = self.__get_cache('', '.' + domain['DomainName'])
 
-    def get(self, rr):
-        record = self.cache.get(rr)
+    def get(self, rr, flush=False):
+        record = ''
+        if not flush:
+            record = self.cache.get(rr)
         if len(record) == 0:
             request = DescribeDomainRecordsRequest.DescribeDomainRecordsRequest()
             request.set_action_name("DescribeDomainRecords")
@@ -133,7 +135,7 @@ class Update:
         else:
             self.config = config
 
-    def all(self):
+    def all(self, flush=False):
 
         """
             :Scan all the clients and domains in the config file
@@ -143,9 +145,9 @@ class Update:
 
         clients = self.config['AliyunClients']
         for client in clients:
-            self.client(client)
+            self.client(client, flush)
 
-    def client(self, client):
+    def client(self, client, flush=False):
         ali_client = AcsClient(
             client['AccessKeyID'],
             client['AccessKeySecret']
@@ -158,7 +160,7 @@ class Update:
             for rr in domain['RRKeywords']:
                 if rr == '':
                     rr == '@'
-                if record.get(rr) <> new_ip:
+                if record.get(rr, flush) <> new_ip:
                     record.set(rr, new_ip)
 
     def __get_new_ip(self):
