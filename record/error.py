@@ -4,7 +4,7 @@ import logging.config
 
 class Error(Exception):
 
-    __errtype_file = 'support/error.json'
+    __errtype_file = 'record/error.json'
 
     def __init__(self, errcode='', errmsg='', special='', level='WARN'):
         Exception.__init__(self)
