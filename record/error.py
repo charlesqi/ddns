@@ -4,10 +4,9 @@ import logging.config
 
 class Error(Exception):
 
-    __errtype_file = 'error.json'
-
     def __init__(self, errcode='', errmsg='', special='', level='WARN'):
         Exception.__init__(self)
+        self.__errtype_file = MODULE_DIRECTORY + 'error.json'
         self.set_level(level)
         self.set_message(errcode, errmsg, special)
         self.log()
@@ -35,7 +34,7 @@ class Error(Exception):
         self.level = level
 
     def set_logger(self):
-        logging.config.dictConfig(json.load(open('logging.json', 'r')))
+        logging.config.dictConfig(json.load(open(MODULE_DIRECTORY + 'logging.json', 'r')))
         self.logger = logging.getLogger()
 
     def log(self):

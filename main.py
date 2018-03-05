@@ -3,5 +3,10 @@
 
 from record import record
 
-task = record.Update('domain.json')
+WORKING_DIRECTORY = '/root/ddns/'
+MODULE_DIRECTORY = WORKING_DIRECTORY + 'module/'
+
+config_file = WORKING_DIRECTORY + 'domain.json'
+
+task = record.Update(config_file)
 task.all()
