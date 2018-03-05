@@ -160,7 +160,7 @@ class Update:
             for rr in domain['RRKeywords']:
                 if rr == '':
                     rr == '@'
-                if record.get(rr, flush) <> new_ip:
+                if record.get(rr, flush) != new_ip:
                     record.set(rr, new_ip)
 
     def __get_new_ip(self):

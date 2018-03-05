@@ -20,7 +20,7 @@ class Error(Exception):
             if errmsg == '':
                 err_file = open(self.__errtype_file, 'r')
                 custom_types = json.load(err_file)
-                err_file.close
+                err_file.close()
                 if errcode in custom_types.keys():
                     if '%s' in custom_types[errcode]:
                         self.message = custom_types[errcode] % special

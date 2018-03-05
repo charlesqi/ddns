@@ -41,7 +41,7 @@ class Cache:
             record['value'] = value
             self.timestamp = record['timestamp']
             json.dump(record, file_name)
-            file_name.close
+            file_name.close()
             return True
 
     def get(self, key):
@@ -54,10 +54,10 @@ class Cache:
                 print(e.message)
             else:
                 record = json.load(file_name)
-                if len(record) <> 0:
+                if len(record) != 0:
                     value = record['value']
                     self.timestamp = record['timestamp']
-                file_name.close
+                file_name.close()
         return value
 
     def remove(self, key):
@@ -66,7 +66,7 @@ class Cache:
             os.remove(key)
         except Error('IOError') as e:
             print(e.message)
-            return false
+            return False
         else:
             return True
 
