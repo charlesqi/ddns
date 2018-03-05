@@ -1,0 +1,30 @@
+{
+    "AliyunClients": [
+    {
+        "AccessKeyID": "LTAIa62kuR1fqwRL",
+        "AccessKeySecret": "63CsfaXsjQE2TXMDhlWtuHl4v4onXq",
+        "Domains": [ 
+            {
+                "DomainName": "qdjiehun.cn",
+                "RRKeywords": [
+                    "miyu",
+                    "remote"
+                ]
+            }
+        ]
+    },
+
+    {   
+        "AccessKeyID": "LTAIsnGV1QipvsMs",
+        "AccessKeySecret": "HUrSU8yFlHXvRq1bGZY8W4Ny9qczjG",
+        "Domains": [ 
+            {
+                "DomainName": "vitalherb.cn",
+                "RRKeywords": [
+                    "test"
+                ]
+            }
+        ]
+    }
+    ]
+}
