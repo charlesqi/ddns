@@ -72,6 +72,7 @@ class Record:
                 raise Error(r['Code'],r['Message'])
         else:
             value = record['Value']
+            self.record_id = value['RecordId']
         return value
 
     def set(self, rr, value):
