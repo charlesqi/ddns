@@ -71,8 +71,8 @@ class Record:
                 value = ''
                 raise Error(r['Code'],r['Message'])
         else:
+            self.record_id = record['RecordId']
             value = record['Value']
-            self.record_id = value['RecordId']
         return value
 
     def set(self, rr, value):
@@ -100,13 +100,14 @@ class Record:
         request.set_RR(rr)
         request.set_Value(value)
         request.set_DomainName(self.domain['DomainName'])
+        r = json.loads(self.client.do_action_with_exception(request))
         try:
             if 'Code' in r.keys():
                 raise Error(r['Code'], r['Message'])
         except Error(r['Code'], r['Message']):
             return ''
         else:
-            return json.loads(self.client.do_action_with_exception(request))['RecordId']
+            return r['RecordId']
 
     def __get_cache(self, key_prefix='', key_suffix=''):
         return Cache(key_prefix, key_suffix)
