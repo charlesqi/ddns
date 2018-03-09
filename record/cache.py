@@ -4,7 +4,7 @@ from shutil import rmtree
 
 class Cache:
 
-    cache_path = '/root/ddns'
+    root_path = '/root/ddns/'
     db_prefix = '.cache'
     key_prefix = ''
     key_suffix = ''
@@ -35,7 +35,7 @@ class Cache:
 
     def select(self, db):
         self.db = db
-        self.cache_path += self.db_prefix + str(self.db)
+        self.cache_path = self.root_path + self.db_prefix + str(self.db)
 
     def set(self, key, value):
         self.__check_path()
