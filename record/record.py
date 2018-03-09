@@ -120,7 +120,6 @@ class Record:
         cache = Cache()
         cache.set_key_prefix(key_prefix)
         cache.set_key_suffix(key_suffix)
-        cache.set_cache_path(os.getcwd())
         return cache
 
 class Update:
