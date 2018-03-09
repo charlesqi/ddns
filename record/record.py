@@ -44,17 +44,21 @@ class Record:
 
     def get(self, rr, flush=False):
         record = ''
+
         if not flush:
             record = self.cache.get(rr)
+
         if len(record) == 0:
+
             request = DescribeDomainRecordsRequest.DescribeDomainRecordsRequest()
             request.set_action_name("DescribeDomainRecords")
             request.set_DomainName(self.domain['DomainName'])
             request.set_RRKeyWord(rr)
             request.set_TypeKeyWord('A')
             r = json.loads(self.client.do_action_with_exception(request))
+
             if 'DomainRecords' in r.keys():
-                record = r['DomainRecords']['Record']
+                record = r['DomainRecords']['Record'][0]
                 if len(record) == 0:
                     ip = CurrentIP()
                     value = ip.get_ip()
@@ -64,16 +68,17 @@ class Record:
                     else:
                         self.record_id = r
                 else:
-                    self.cache.set(rr, record[0])
-                    self.record_id = record[0]['RecordId']
-                    value = record[0]['Value']
+                    self.cache.set(rr, json.dumps(record))
+                    self.record_id = record['RecordId']
+                    value = record['Value']
             else:
-                value = ''
                 raise Error(r['Code'],r['Message'])
+
         else:
             record = json.loads(record)
             self.record_id = record['RecordId']
             value = record['Value']
+
         return value
 
     def set(self, rr, value):
