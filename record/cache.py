@@ -6,10 +6,7 @@ from shutil import rmtree
 
 class Cache:
 
-    __dir = None
     db_prefix = '.cache'
-    db = 0
-    timestamp = None
 
     def __init__(self, key_prefix='', key_suffix=''):
         self.key_prefix = key_prefix
@@ -36,11 +33,7 @@ class Cache:
             print(e.message)
             return False
         else:
-            record = {}
-            record['timestamp'] = time()
-            record['value'] = value
-            self.timestamp = record['timestamp']
-            json.dump(record, file_name)
+            file_name.write(value)
             file_name.close()
             return True
 
@@ -50,13 +43,10 @@ class Cache:
         if os.path.exists(key):
             try:
                 file_name = open(key, "r")
-            except Error('IOError') as e:
-                print(e.message)
+            except:
+                raise Error('IOError')
             else:
-                record = json.load(file_name)
-                if len(record) != 0:
-                    value = record['value']
-                    self.timestamp = record['timestamp']
+                value = file_name.read()
                 file_name.close()
         return value
 
@@ -64,17 +54,15 @@ class Cache:
         key = self.__prepare(key)
         try:
             os.remove(key)
-        except Error('IOError') as e:
-            print(e.message)
-            return False
+        except:
+            raise Error('IOError')
         else:
             return True
 
     def flush(self):
         try:
             rmtree(self.__dir)
-        except Error('IOError') as e:
-            print(e.message)
-            return False
+        except:
+            raise Error('IOError')
         else:
             return True
