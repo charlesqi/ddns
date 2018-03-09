@@ -9,7 +9,6 @@ class Cache:
     key_suffix = ''
 
     def __init__(self):
-        self.set_cache_path(os.getcwd())
         self.select(0)
 
     def __check_path(self):
@@ -33,7 +32,7 @@ class Cache:
         self.cache_path = cache_path
 
     def select(self, db):
-        self.cache_path = self.db_prefix + str(db)
+        self.set_cache_path(self.db_prefix + str(db))
 
     def set(self, key, value):
         self.__check_path()
