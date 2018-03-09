@@ -3,9 +3,7 @@
 
 from record import record
 
-WORKING_DIRECTORY = '/root/ddns/'
-
-config_file = WORKING_DIRECTORY + 'domain.json'
+config_file = 'domain.json'
 
 task = record.Update(config_file)
 task.all()
