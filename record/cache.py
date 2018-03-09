@@ -22,7 +22,7 @@ class Cache:
 
     def select(self, db=0):
         self.db = db
-        self.__dir = self.db_prefix + str(self.db)
+        self.__dir = WORKING_DIRECTORY + self.db_prefix + str(self.db)
         self.__check_dir()
 
     def set(self, key, value):
