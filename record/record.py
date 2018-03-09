@@ -71,6 +71,7 @@ class Record:
                 value = ''
                 raise Error(r['Code'],r['Message'])
         else:
+            record = json.loads(record)
             self.record_id = record['RecordId']
             value = record['Value']
         return value
