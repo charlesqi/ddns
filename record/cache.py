@@ -20,7 +20,7 @@ class Cache:
     def __prepare(self, key):
         filename = self.cache_path
         filename += self.key_prefix
-        filename += key
+        filename += '/' + key
         filename += self.key_suffix
         return filename
 
