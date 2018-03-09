@@ -13,13 +13,14 @@
 
 """
 
+import os
 import json
 from error import Error
 from cache import Cache
 from ip import CurrentIP
 from aliyunsdkcore.client import AcsClient
-from aliyunsdkcore.acs_exception.exceptions import ClientException
-from aliyunsdkcore.acs_exception.exceptions import ServerException
+#from aliyunsdkcore.acs_exception.exceptions import ClientException
+#from aliyunsdkcore.acs_exception.exceptions import ServerException
 from aliyunsdkalidns.request.v20150109 import DescribeDomainRecordsRequest
 from aliyunsdkalidns.request.v20150109 import UpdateDomainRecordRequest
 from aliyunsdkalidns.request.v20150109 import AddDomainRecordRequest
@@ -116,7 +117,11 @@ class Record:
             return r['RecordId']
 
     def __get_cache(self, key_prefix='', key_suffix=''):
-        return Cache(key_prefix, key_suffix)
+        cache = Cache()
+        cache.set_key_prefix(key_prefix)
+        cache.set_key_suffix(key_suffix)
+        cache.set_cache_path(os.getcwd())
+        return cache
 
 class Update:
 

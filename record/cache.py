@@ -1,37 +1,48 @@
 import os
-import json
 from error import Error
-from time import time
 from shutil import rmtree
 
 class Cache:
 
+    cache_path = ''
     db_prefix = '.cache'
+    key_prefix = ''
+    key_suffix = ''
 
-    def __init__(self, key_prefix='', key_suffix=''):
-        self.key_prefix = key_prefix
-        self.key_suffix = key_suffix
-        self.select()
+    def __init__(self):
+        self.set_cache_path(os.getcwd())
+        self.select(0)
 
-    def __check_dir(self):
-        if not(os.path.exists(self.__dir)):
-            os.mkdir(self.__dir)
+    def __check_path(self):
+        if not(os.path.exists(self.cache_path)):
+            os.mkdir(self.cache_path)
 
     def __prepare(self, key):
-        return self.__dir + '/' + self.key_prefix + key + self.key_suffix
+        filename = self.cache_path
+        filename += self.key_prefix
+        filename += key
+        filename += self.key_suffix
+        return filename
 
-    def select(self, db=0):
+    def set_key_prefix(self, key_prefix):
+        self.key_prefix = key_prefix
+
+    def set_key_suffix(self, key_suffix):
+        self.key_suffix = key_suffix
+
+    def set_cache_path(self, cache_path):
+        self.cache_path = cache_path + '/'
+
+    def select(self, db):
         self.db = db
-        self.__dir = WORKING_DIRECTORY + self.db_prefix + str(self.db)
-        self.__check_dir()
 
     def set(self, key, value):
+        self.__check_path()
         key = self.__prepare(key)
         try:
             file_name = open(key, "w")
-        except Error('IOError') as e:
-            print(e.message)
-            return False
+        except:
+            raise Error('IOError')
         else:
             file_name.write(value)
             file_name.close()
@@ -40,15 +51,14 @@ class Cache:
     def get(self, key):
         value = ''
         key = self.__prepare(key)
-        if os.path.exists(key):
-            try:
-                file_name = open(key, "r")
-            except:
-                raise Error('IOError')
-            else:
-                value = file_name.read()
-                file_name.close()
-        return value
+        try:
+            file_name = open(key, "r")
+            value = file_name.read()
+            file_name.close()
+        except:
+            raise Error('IOError')
+        finally:
+            return value
 
     def remove(self, key):
         key = self.__prepare(key)
@@ -61,7 +71,7 @@ class Cache:
 
     def flush(self):
         try:
-            rmtree(self.__dir)
+            rmtree(self.cache_path)
         except:
             raise Error('IOError')
         else:
