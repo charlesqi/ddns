@@ -1,4 +1,5 @@
 import json
+import os
 import logging
 import logging.config
 
@@ -41,6 +42,9 @@ class Logger:
 
     @staticmethod
     def get_logger():
+        log_path = 'log'
+        if not os.path.exists(log_path):
+            os.mkdir(log_path)
         logging.config.dictConfig(json.load(open('record/logging.json', 'r')))
         logger = logging.getLogger()
         return logger
