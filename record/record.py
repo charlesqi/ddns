@@ -180,7 +180,8 @@ class Update:
                         message = 'Failed to set the dns record %s from %s to %s.'
                     message = message % (rr + '.' + domain['DomainName'], old_ip, new_ip)
                 else:
-                    message = 'The IP address has not changed.'
+                    message = 'Domain %s IP address has not changed.'
+                    message = message % (rr +'.' + domain['DomainName'])
                 self.log(message)
 
     def __get_new_ip(self):
