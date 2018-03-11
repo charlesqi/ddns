@@ -13,17 +13,17 @@
 
 """
 
-import os
 import json
+from error import Logger
 from error import Error
 from cache import Cache
 from ip import CurrentIP
 from aliyunsdkcore.client import AcsClient
-#from aliyunsdkcore.acs_exception.exceptions import ClientException
-#from aliyunsdkcore.acs_exception.exceptions import ServerException
 from aliyunsdkalidns.request.v20150109 import DescribeDomainRecordsRequest
 from aliyunsdkalidns.request.v20150109 import UpdateDomainRecordRequest
 from aliyunsdkalidns.request.v20150109 import AddDomainRecordRequest
+#from aliyunsdkcore.acs_exception.exceptions import ClientException
+#from aliyunsdkcore.acs_exception.exceptions import ServerException
 
 class Record:
 
@@ -172,9 +172,21 @@ class Update:
             for rr in domain['RRKeywords']:
                 if rr == '':
                     rr == '@'
-                if record.get(rr, flush) != new_ip:
-                    record.set(rr, new_ip)
+                old_ip = record.get(rr, flush)
+                if old_ip != new_ip:
+                    if record.set(rr, new_ip):
+                        message = 'Succeeded to set the dns record %s from %s to %s.'
+                    else:
+                        message = 'Failed to set the dns record %s from %s to %s.'
+                    message = message % (rr + '.' + domain['DomainName'], old_ip, new_ip)
+                else:
+                    message = 'The IP address has not changed.'
+                self.log(message)
 
     def __get_new_ip(self):
         ip = CurrentIP()
         return ip.get_ip()
+
+    def log(self, message):
+        self.logger = Logger.get_logger()
+        self.logger.info(message)

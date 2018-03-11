@@ -33,11 +33,14 @@ class Error(Exception):
     def set_level(self, level):
         self.level = level
 
-    def set_logger(self):
-        logging.config.dictConfig(json.load(open('record/logging.json', 'r')))
-        self.logger = logging.getLogger()
-
     def log(self):
-        if not hasattr(self, 'logger'):
-            self.set_logger()
+        self.logger = Logger().get_logger()
         eval('self.logger.' + self.level.lower() + '("' + self.message +'")')
+
+class Logger:
+
+    @staticmethod
+    def get_logger():
+        logging.config.dictConfig(json.load(open('record/logging.json', 'r')))
+        logger = logging.getLogger()
+        return logger
