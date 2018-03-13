@@ -6,24 +6,20 @@ from error import Error
 
 class CurrentIP:
 
-    # 设置可以获取公网IP的地址池
-    proxy_pool = [
-        "jsonip.com",
-        "ifconfig.me",
-        "ip.cn",
-        "ip.360.cn/IPShare/info"
-    ]
-
-    def __init__(self):
+    def __init__(self, detectors):
         self.set_timeout(3)
+        self.set_proxy_pool(detectors)
 
     def set_timeout(self, timeout):
         self.__timeout = timeout
 
+    def set_proxy_pool(self, proxy_pool):
+        self.proxy_pool = proxy_pool
+
     def get_ip(self):
         ip = ''
         i = 0
-        while len(ip) == 0:
+        while len(ip) == 0 or i == len(self.proxy_pool):
             ip = self.__get_from_proxy(self.proxy_pool[i])
             i = i + 1
         if len(ip) == 0:
@@ -40,7 +36,7 @@ class CurrentIP:
         except:
             raise Error("TimeoutError", '', url)
         else:
-            pattern = '(?!(((0)|(10)|(127)|(192\.168)|(172\.(1[6-9])|(2[0-9])|(3[01])))))'
+            pattern = '(?!(((0)|(10)|(127)|(192\.168)|(172\.(1[6-9])|(2[0-9])|(3[01])))|(2[4,5][0-5])))'
             pattern += '((1[0-9][0-9]\.)|(2[0-4][0-9]\.)|(25[0-5]\.)|([1-9][0-9]\.)|([0-9]\.)){3}'
             pattern += '((1[0-9][0-9])|(2[0-4][0-9])|(25[0-5])|([1-9][0-9])|([0-9]))'
             pattern = re.compile(pattern)

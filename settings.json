@@ -1,4 +1,12 @@
 {
+    "IPDetecors":
+        [
+            "ip.360.cn/IPShare/info",
+            "ip.cn",
+            "jsonip.com",
+            "ifconfig.me"
+        ],
+
     "AliyunClients": [
     {
         "AccessKeyID": "LTAIa62kuR1fqwRL",

@@ -61,13 +61,7 @@ class Record:
             if 'DomainRecords' in r.keys():
                 record = r['DomainRecords']['Record'][0]
                 if len(record) == 0:
-                    ip = CurrentIP()
-                    value = ip.get_ip()
-                    r = self.add(rr, value)
-                    if r == '':
-                        value = ''
-                    else:
-                        self.record_id = r
+                    value = ''
                 else:
                     self.cache.set(rr, json.dumps(record))
                     self.record_id = record['RecordId']
@@ -173,6 +167,9 @@ class Update:
                 if rr == '':
                     rr == '@'
                 old_ip = record.get(rr, flush)
+                if len(old_ip) == 0:
+                    record.add(rr, new_ip)
+                    old_ip = record.get(rr, flush)
                 if old_ip != new_ip:
                     if record.set(rr, new_ip):
                         message = 'Succeeded to set the dns record %s from %s to %s.'
@@ -182,7 +179,7 @@ class Update:
                     self.log(message)
 
     def __get_new_ip(self):
-        ip = CurrentIP()
+        ip = CurrentIP(self.config['IPDetectors'])
         return ip.get_ip()
 
     def log(self, message):
