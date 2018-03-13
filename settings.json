@@ -1,39 +1,35 @@
 {
-    "Detecors":
-        [
-            "ip.360.cn/IPShare/info",
-            "ip.cn",
-            "jsonip.com",
-            "ifconfig.me"
-        ],
-
+    "Detecors": [
+        "ip.360.cn/IPShare/info",
+        "ip.cn",
+        "jsonip.com",
+        "ifconfig.me"
+    ],
     "AliyunClients": [
-    {
-        "AccessKeyID": "LTAIa62kuR1fqwRL",
-        "AccessKeySecret": "63CsfaXsjQE2TXMDhlWtuHl4v4onXq",
-        "Domains": [ 
-            {
-                "DomainName": "qdjiehun.cn",
-                "RRKeywords": [
-                    "miyu",
-                    "remote"
-                ]
-            }
-        ]
-    },
-
-    {   
-        "AccessKeyID": "LTAIsnGV1QipvsMs",
-        "AccessKeySecret": "HUrSU8yFlHXvRq1bGZY8W4Ny9qczjG",
-        "Domains": [ 
-            {
-                "DomainName": "vitalherb.cn",
-                "RRKeywords": [
-                    "test"
-                ]
-            }
-        ]
-    }
-
+        {
+            "AccessKeyID": "LTAIa62kuR1fqwRL",
+            "AccessKeySecret": "63CsfaXsjQE2TXMDhlWtuHl4v4onXq",
+            "Domains": [
+                {
+                    "DomainName": "qdjiehun.cn",
+                    "RRKeywords": [
+                        "miyu",
+                        "remote"
+                    ]
+                }
+            ]
+        },
+        {
+            "AccessKeyID": "LTAIsnGV1QipvsMs",
+            "AccessKeySecret": "HUrSU8yFlHXvRq1bGZY8W4Ny9qczjG",
+            "Domains": [
+                {
+                    "DomainName": "vitalherb.cn",
+                    "RRKeywords": [
+                        "test"
+                    ]
+                }
+            ]
+        }
     ]
 }
