@@ -58,10 +58,10 @@ class Record:
             r = json.loads(self.client.do_action_with_exception(request))
 
             if 'DomainRecords' in r.keys():
-                record = r['DomainRecords']['Record'][0]
-                if len(record) == 0:
+                if len(r['DomainRecords']['Record']) == 0:
                     value = ''
                 else:
+                    record = r['DomainRecords']['Record'][0]
                     self.cache.set(rr, json.dumps(record))
                     self.record_id = record['RecordId']
                     value = record['Value']
