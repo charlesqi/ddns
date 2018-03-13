@@ -165,7 +165,7 @@ class Update:
             record = Record(ali_client, domain)
             for rr in domain['RRKeywords']:
                 if rr == '':
-                    rr == '@'
+                    rr = '@'
                 old_ip = record.get(rr, flush)
                 if len(old_ip) == 0:
                     record.add(rr, new_ip)
@@ -179,7 +179,7 @@ class Update:
                     self.log(message)
 
     def __get_new_ip(self):
-        ip = CurrentIP(self.config['IPDetectors'])
+        ip = CurrentIP(self.config['Detecors'])
         return ip.get_ip()
 
     def log(self, message):

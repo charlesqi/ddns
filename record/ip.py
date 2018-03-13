@@ -8,19 +8,19 @@ class CurrentIP:
 
     def __init__(self, detectors):
         self.set_timeout(3)
-        self.set_proxy_pool(detectors)
+        self.set_detectors(detectors)
 
     def set_timeout(self, timeout):
         self.__timeout = timeout
 
-    def set_proxy_pool(self, proxy_pool):
-        self.proxy_pool = proxy_pool
+    def set_detectors(self, proxy_pool):
+        self.__detectors = proxy_pool
 
     def get_ip(self):
         ip = ''
         i = 0
-        while len(ip) == 0 or i == len(self.proxy_pool):
-            ip = self.__get_from_proxy(self.proxy_pool[i])
+        while len(ip) == 0 or i == len(self.__detectors):
+            ip = self.__get_from_proxy(self.__detectors[i])
             i = i + 1
         if len(ip) == 0:
             raise Error('IPRequestError', '', '', 'CRITICAL')
