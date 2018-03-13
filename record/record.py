@@ -14,8 +14,7 @@
 """
 
 import json
-from error import Logger
-from error import Error
+from error import Logger, Error
 from cache import Cache
 from ip import CurrentIP
 from aliyunsdkcore.client import AcsClient
