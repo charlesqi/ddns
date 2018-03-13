@@ -3,7 +3,14 @@
         "ip.360.cn/IPShare/info",
         "ip.cn",
         "jsonip.com",
-        "ifconfig.me"
+        "ifconfig.me",
+        "ipconfig.io",
+        "myip.ipip.net",
+        "ip.sb",
+        "httpbin.org/ip",
+        "ifcfg.cn",
+        "https://whatip.ga",
+        "ip.taobao.com/service/getIpInfo2.php?ip=myip"
     ],
     "AliyunClients": [
         {
