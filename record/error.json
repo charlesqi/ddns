@@ -2,6 +2,6 @@
     "IOError": "Temporary file used as the cache could not be accessed.",
     "TimeoutError": "The request to url %s timed out..",
     "ReturnValueError": "Could not get expected return value from %s.",
-    "DomainConfigError": "The domain format could not be correctly recognized. Please check the domain settings in config.ini.",
+    "DomainConfigError": "The domain format could not be correctly recognized. Please check the file settings.json.",
     "IPRequestError": "Could not get ip address from any url in the proxy pool."
 }
