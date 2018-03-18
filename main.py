@@ -5,7 +5,8 @@ import os
 from record import record
 
 path = '/root/ddns/'
-os.chdir(path)
+if os.path.exists(path):
+    os.chdir(path)
 config_file = 'settings.json'
 
 task = record.Update(config_file)
