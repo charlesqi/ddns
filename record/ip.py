@@ -13,8 +13,8 @@ class CurrentIP:
     def set_timeout(self, timeout):
         self.__timeout = timeout
 
-    def set_detectors(self, proxy_pool):
-        self.__detectors = proxy_pool
+    def set_detectors(self, detectors):
+        self.__detectors = detectors
 
     def get_ip(self):
         ip = ''
