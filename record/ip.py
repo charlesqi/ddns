@@ -29,7 +29,7 @@ class CurrentIP:
 
     def __get_from_proxy(self, url):
         ip = ''
-        if re.match('^http', url) == None:
+        if re.match('^(http:|https:)', url) == None:
             url = 'http://' + url
         try:
             doc = urllib2.urlopen(url, timeout = self.__timeout).read()
