@@ -44,6 +44,6 @@ class CurrentIP:
             if result == None:
                 raise Error('ReturnValueError', '', url)
             else:
-                ip = result.group(0)
+                ip = result.group(-1)
         finally:
             return ip
