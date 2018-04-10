@@ -36,7 +36,7 @@ class CurrentIP:
         except:
             raise Error("TimeoutError", '', url)
         else:
-            pattern = '(?!(((0)|(10)|(127)|(192\.168)|(172\.(1[6-9])|(2[0-9])|(3[01])))|(2[4,5][0-5])))'
+            pattern = '(?!(((0\.)|(10\.)|(127)|(192\.168)|(172\.(1[6-9])|(2[0-9]\.)|(3[01]\.)))|(2[4,5][0-5])))'
             pattern += '((1[0-9][0-9]\.)|(2[0-4][0-9]\.)|(25[0-5]\.)|([1-9][0-9]\.)|([0-9]\.)){3}'
             pattern += '((1[0-9][0-9])|(2[0-4][0-9])|(25[0-5])|([1-9][0-9])|([0-9]))'
             pattern = re.compile(pattern)
@@ -44,6 +44,6 @@ class CurrentIP:
             if result == None:
                 raise Error('ReturnValueError', '', url)
             else:
-                ip = result.group(-1)
+                ip = result.group(0)
         finally:
             return ip
