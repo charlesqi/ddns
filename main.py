@@ -5,9 +5,7 @@ import os
 import sys
 from record import record
 
-path = sys.path[0]
-if os.path.exists(path):
-    os.chdir(path)
+os.chdir(sys.path[0])
 config_file = 'settings.json'
 
 task = record.Update(config_file)
