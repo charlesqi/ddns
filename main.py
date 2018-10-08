@@ -4,7 +4,7 @@
 import os
 from record import record
 
-path = '/root/ddns/'
+path = '/home/apps/ddns/'
 if os.path.exists(path):
     os.chdir(path)
 config_file = 'settings.json'
