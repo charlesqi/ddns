@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding: utf-8
 
 import os
+import sys
 from record import record
 
-path = '/home/apps/ddns/'
+path = sys.path[0]
 if os.path.exists(path):
     os.chdir(path)
 config_file = 'settings.json'
