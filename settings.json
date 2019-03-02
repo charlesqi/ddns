@@ -14,13 +14,13 @@
     ],
     "AliyunClients": [
         {
-            "AccessKeyID": "LTAIa62kuR1fqwRL",
-            "AccessKeySecret": "63CsfaXsjQE2TXMDhlWtuHl4v4onXq",
+            "AccessKeyID": "",
+            "AccessKeySecret": "",
             "Domains": [
                 {
-                    "DomainName": "qdjiehun.cn",
+                    "DomainName": "",
                     "RRKeywords":[
-                        "remote"
+                        ""
                     ]
                 }
             ]
